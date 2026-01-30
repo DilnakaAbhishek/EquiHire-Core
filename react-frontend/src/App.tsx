@@ -1,8 +1,14 @@
-import LandingPage from './pages/LandingPage'
+import { useAuthContext } from "@asgardeo/auth-react";
+import LandingPage from './pages/LandingPage';
+import Dashboard from './pages/Dashboard';
 
 function App() {
+  const { state } = useAuthContext();
+
   return (
-    <LandingPage />
+    <>
+      {state.isAuthenticated ? <Dashboard /> : <LandingPage />}
+    </>
   )
 }
 
