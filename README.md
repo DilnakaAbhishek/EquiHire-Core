@@ -222,7 +222,7 @@ The connection is established.
    cd ballerina-gateway
    ```
 2. Configure your credentials in `Config.toml`:
-   - Set `smtpPassword` (Brevo/SMTP Master Password)
+   - Set `smtpPassword` (SMTP Master Password)
    - Set `db.host`, `db.user`, `db.password` (from Supabase)
 3. Run the service:
    ```bash
@@ -261,25 +261,17 @@ The connection is established.
 
 ## ⚙️ Configuration
 
-### Ballerina Gateway (`ballerina-gateway/Config.toml`)
-Manages backend configurations including Database connection and Email services.
-```toml
-[database]
-host = "db.xyz.supabase.co"
-user = "postgres"
-password = "..."
+### Ballerina Gateway (Backend)
+Refer to `ballerina-gateway/Config.toml.example` for the required configurations.
+1.  Copy `Config.toml.example` to `Config.toml`.
+2.  Fill in your Database credentials (Supabase/Postgres).
+3.  Configure your SMTP settings (Generic Ballerina Email Connector).
+4.  Add your Asgardeo Identity Provider URLs.
 
-# Email Configuration
-smtpHost = "smtp-relay.brevo.com"
-smtpPassword = "..."
-```
-
-### Frontend (`react-frontend/.env`)
-Manages UI configuration and authentication settings.
-```env
-VITE_ASGARDEO_CLIENT_ID=...
-VITE_ASGARDEO_BASE_URL=...
-```
+### React Frontend (UI)
+Refer to `react-frontend/.env.example` (or create one based on requirements).
+1.  Create a `.env` file in `react-frontend/`.
+2.  Add your Asgardeo Client ID and Base URL.
 
 ---
 
@@ -287,10 +279,29 @@ VITE_ASGARDEO_BASE_URL=...
 
 ```
 EquiHire-Core/
+├── ballerina-gateway/       # [BACKEND] API Gateway & Orchestrator
+│   ├── modules/
+│   │   ├── database/        # Database Interactions (Repository Pattern)
+│   │   ├── email/           # Email Logic (SMTP)
+│   │   └── types/           # Shared DTOs
+│   ├── api.bal              # REST API Service
+│   ├── service.bal          # WebSocket Services
+│   ├── Config.toml          # Local Configuration (GitIgnored)
+│   └── Config.toml.example  # Template Configuration
+│
+├── react-frontend/          # [FRONTEND] Recruiter Dashboard & Candidate Portal
+│   ├── src/
+│   │   ├── pages/           # Application Views
+│   │   └── components/      # Reusable UI Components
+│   ├── .env                 # Local Environment Variables (GitIgnored)
 │   └── vite.config.ts
-├── docker-compose.yml       # Container Orchestration
+│
+├── python-ai-engine/        # [AI ENGINE] Processing Service
+│   ├── main.py
+│   └── text_processing/
+│
+├── docker-compose.yml       # Orchestration
 └── README.md
-
 ```
 
 

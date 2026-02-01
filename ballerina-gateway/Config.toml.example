@@ -1,6 +1,8 @@
 pythonServiceUrl = "http://localhost:8000"
 asgardeoTokenAudience = "EquiHire-Core"
 frontendUrl = "http://localhost:5173"
+asgardeoOrgUrl = "https://api.asgardeo.io/t/***********/oauth2/token"
+asgardeoJwksUrl = "https://api.asgardeo.io/t/***********/oauth2/jwks"
 
 # Brevo SMTP Configuration
 smtpHost = "smtp-relay.brevo.com"
